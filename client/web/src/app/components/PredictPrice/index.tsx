@@ -125,7 +125,7 @@ const PredictPrice = () => {
       setError("Please enter car age");
       return;
     }
-    await fetch("http://localhost:8000/predict", {
+    await fetch("https://auto-forecast.onrender.com/predict", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

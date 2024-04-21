@@ -73,7 +73,7 @@ const PredictPrice = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string>("");
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setError("");
     setPredictedPrice(null);
     setLoading(true);
@@ -125,7 +125,7 @@ const PredictPrice = () => {
       setError("Please enter car age");
       return;
     }
-    fetch("http://localhost:8000/predict", {
+    await fetch("http://localhost:8000/predict", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -347,7 +347,8 @@ const PredictPrice = () => {
 
               {predictedPrice && (
                 <div className="text-green-500">
-                  Predicted price: ₹{new Intl.NumberFormat().format(predictedPrice)}
+                  Predicted price: ₹
+                  {new Intl.NumberFormat().format(predictedPrice)}
                 </div>
               )}
 

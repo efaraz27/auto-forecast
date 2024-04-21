@@ -3,6 +3,7 @@ import { Image } from "expo-image";
 import { AntDesign } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   const { push } = useRouter();
@@ -13,6 +14,7 @@ export default function App() {
 
   return (
     <>
+      <StatusBar style="light" />
       <SafeAreaView style={styles.container}>
         <Image
           source={require("../assets/mercedes.png")}

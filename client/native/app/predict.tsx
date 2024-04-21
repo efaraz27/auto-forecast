@@ -5,6 +5,7 @@ import CustomTextInput from "../components/text-input";
 import CustomSelectInput from "../components/select-input";
 import { useState } from "react";
 import { ScrollView } from "react-native";
+import { useRouter } from "expo-router";
 
 const allowedBrands = [
   "Select Brand",
@@ -79,6 +80,8 @@ const ownerTypeItems = allowedOwnerTypes.map((ownerType) => ({
 }));
 
 export default function Predict() {
+  const router = useRouter();
+
   const [brand, setBrand] = useState<string | null>(null);
   const [location, setLocation] = useState<string | null>(null);
   const [year, setYear] = useState<number>(0);
@@ -96,8 +99,114 @@ export default function Predict() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+  const handleSubmit = async () => {
+    setError(null);
+    setPredictedPrice(null);
+    setLoading(true);
+    if (brand === "") {
+      setError("Please select a brand");
+      return;
+    }
+    if (location === "") {
+      setError("Please select a location");
+      return;
+    }
+    if (year === 0) {
+      setError("Please enter year");
+      return;
+    }
+    if (kmsDriven === 0) {
+      setError("Please enter kilometers driven");
+      return;
+    }
+    if (fuelType === "") {
+      setError("Please select fuel type");
+      return;
+    }
+    if (transmission === "") {
+      setError("Please select transmission");
+      return;
+    }
+    if (ownerType === "") {
+      setError("Please select owner type");
+      return;
+    }
+    if (mileage === 0) {
+      setError("Please enter mileage");
+      return;
+    }
+    if (engine === 0) {
+      setError("Please enter engine");
+      return;
+    }
+    if (maxPower === 0) {
+      setError("Please enter power");
+      return;
+    }
+    if (seats === 0) {
+      setError("Please enter seats");
+      return;
+    }
+    if (carAge === 0) {
+      setError("Please enter car age");
+      return;
+    }
+    await fetch("https://auto-forecast.onrender.com/predict", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: brand,
+        location,
+        year,
+        kilometers_driven: kmsDriven,
+        fuel_type: fuelType,
+        transmission,
+        owner_type: ownerType,
+        mileage,
+        engine,
+        max_power: maxPower,
+        seats,
+        age: carAge,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setLoading(false);
+        if (data.prediction) {
+          setPredictedPrice(data.prediction);
+          router.push({
+            pathname: "/result",
+            params: {
+              prediction: data.prediction,
+              brand,
+              location,
+              year,
+              kmsDriven,
+              fuelType,
+              transmission,
+              ownerType,
+              mileage,
+              engine,
+              maxPower,
+              seats,
+              carAge,
+            },
+          });
+        } else {
+          setError("Error predicting price");
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        setError("Error predicting price");
+      });
+  };
+
   return (
     <>
+      <StatusBar style="light" />
       <SafeAreaView style={styles.container}>
         <Text style={styles.header}>Predict</Text>
         <ScrollView contentContainerStyle={styles.inputs}>
@@ -151,22 +260,22 @@ export default function Predict() {
             zIndex={600}
           />
           <CustomTextInput
-            placeholder="Mileage"
-            label="Mileage"
+            placeholder="Mileage (Kmpl)"
+            label="Mileage (Kmpl)"
             value={mileage}
             type="number"
             onChangeText={(text) => setMileage(Number(text))}
           />
           <CustomTextInput
-            placeholder="Engine"
-            label="Engine"
+            placeholder="Engine (CC)"
+            label="Engine (CC)"
             value={engine}
             type="number"
             onChangeText={(text) => setEngine(Number(text))}
           />
           <CustomTextInput
-            placeholder="Max Power"
-            label="Max Power"
+            placeholder="Max Power (bhp)"
+            label="Max Power (bhp)"
             value={maxPower}
             type="number"
             onChangeText={(text) => setMaxPower(Number(text))}
@@ -179,17 +288,22 @@ export default function Predict() {
             onChangeText={(text) => setSeats(Number(text))}
           />
           <CustomTextInput
-            placeholder="Car Age"
-            label="Car Age"
+            placeholder="Car Age (Years)"
+            label="Car Age (Years)"
             value={carAge}
             type="number"
             onChangeText={(text) => setCarAge(Number(text))}
           />
         </ScrollView>
-        <Text style={{ color: "#FF0000" }}>{error}</Text>
-        <Text style={{ color: "#FF0000" }}>{predictedPrice}</Text>
-        <TouchableOpacity style={styles.predictBtn}>
-          <Text style={{ color: "#FFFFFF" }}>Predict</Text>
+        {error && <Text style={{ color: "#FF0000" }}>{error}</Text>}
+        <TouchableOpacity
+          style={styles.predictBtn}
+          onPress={handleSubmit}
+          disabled={loading}
+        >
+          <Text style={{ color: "#FFFFFF" }}>
+            {loading ? "Predicting..." : "Predict"}
+          </Text>
         </TouchableOpacity>
       </SafeAreaView>
     </>

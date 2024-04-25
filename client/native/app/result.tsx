@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, Dimensions, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { ScrollView } from "react-native";
@@ -22,10 +22,26 @@ export default function Result() {
     "Car age (Years)": params.carAge,
   };
 
+  const { width, height } = Dimensions.get("window");
+
   return (
     <>
       <StatusBar style="light" />
       <SafeAreaView style={styles.container}>
+        <Image
+          style={{
+            opacity: 1,
+            flex: 1,
+            width,
+            height,
+            margin: 0,
+            padding: 0,
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
+          source={require("../assets/background.png")}
+        />
         <Text style={styles.header}>Result</Text>
         <ScrollView>
           {params.prediction && (
@@ -58,22 +74,22 @@ export default function Result() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#070F2B",
+    backgroundColor: "#111111",
     padding: 16,
   },
   header: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#9290C3",
+    color: "#FF3F02",
     marginTop: 32,
     marginBottom: 48,
   },
   resultContainer: {
     marginBottom: 32,
-    backgroundColor: "#1B1A55",
+    backgroundColor: "#3C140B",
     padding: 16,
     borderRadius: 8,
-    borderColor: "#9290C3",
+    borderColor: "#FF3F02",
     borderWidth: 1,
   },
   predictedPrice: {

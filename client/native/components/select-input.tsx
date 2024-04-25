@@ -33,16 +33,16 @@ const Dropdown = ({
         setValue={setValue}
         placeholder={placeholder}
         style={styles.dropdownInput}
-        placeholderStyle={{ color: "#535C91" }}
+        placeholderStyle={{ color: "#75220E" }}
         showArrowIcon
         ArrowDownIconComponent={() => (
-          <MaterialIcons name="keyboard-arrow-down" size={24} color="#9290C3" />
+          <MaterialIcons name="keyboard-arrow-down" size={24} color="#FF3F02" />
         )}
         ArrowUpIconComponent={() => (
-          <MaterialIcons name="keyboard-arrow-up" size={24} color="#9290C3" />
+          <MaterialIcons name="keyboard-arrow-up" size={24} color="#FF3F02" />
         )}
         dropDownContainerStyle={{ zIndex: 1000 }}
-        labelStyle={{ color: "#9290C3" }}
+        labelStyle={{ color: "#FF3F02" }}
       />
     </View>
   );
@@ -52,15 +52,15 @@ export default Dropdown;
 
 const styles = StyleSheet.create({
   dropdownInput: {
-    backgroundColor: "#070F2B",
-    borderColor: "#9290C3",
+    backgroundColor: "transparent",
+    borderColor: "#FF3F02",
     borderWidth: 1,
     borderRadius: 8,
     width: "100%",
     zIndex: 1000,
   },
   label: {
-    color: "#9290C3",
+    color: "#FF3F02",
     fontSize: 16,
     marginBottom: 2,
   },

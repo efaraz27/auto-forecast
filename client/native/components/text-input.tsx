@@ -46,8 +46,8 @@ export default function CustomTextInput({
             editable={editable}
             value={value?.toString()}
             onChangeText={handleChangeText}
-            placeholderTextColor="#535C91"
-            style={{ color: "#9290C3", width: "100%" }}
+            placeholderTextColor="#75220E"
+            style={{ color: "#FF3F02", width: "100%" }}
           />
         </View>
       </View>
@@ -57,13 +57,13 @@ export default function CustomTextInput({
 
 const styles = StyleSheet.create({
   textInput: {
-    borderColor: "#9290C3",
+    borderColor: "#FF3F02",
     borderWidth: 1,
     padding: 16,
     borderRadius: 8,
   },
   label: {
-    color: "#9290C3",
+    color: "#FF3F02",
     fontSize: 16,
     marginBottom: 2,
   },

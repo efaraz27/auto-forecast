@@ -1,5 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ImageBackground,
+  Dimensions,
+  Image,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomTextInput from "../components/text-input";
 import CustomSelectInput from "../components/select-input";
@@ -84,16 +91,16 @@ export default function Predict() {
 
   const [brand, setBrand] = useState<string | null>(null);
   const [location, setLocation] = useState<string | null>(null);
-  const [year, setYear] = useState<number>(0);
-  const [kmsDriven, setKmsDriven] = useState<number>(0);
+  const [year, setYear] = useState<number | undefined>(undefined);
+  const [kmsDriven, setKmsDriven] = useState<number | undefined>(undefined);
   const [fuelType, setFuelType] = useState<string | null>(null);
   const [transmission, setTransmission] = useState<string | null>(null);
   const [ownerType, setOwnerType] = useState<string | null>(null);
-  const [mileage, setMileage] = useState<number>(0);
-  const [engine, setEngine] = useState<number>(0);
-  const [maxPower, setMaxPower] = useState<number>(0);
-  const [seats, setSeats] = useState<number>(0);
-  const [carAge, setCarAge] = useState<number>(0);
+  const [mileage, setMileage] = useState<number | undefined>(undefined);
+  const [engine, setEngine] = useState<number | undefined>(undefined);
+  const [maxPower, setMaxPower] = useState<number | undefined>(undefined);
+  const [seats, setSeats] = useState<number | undefined>(undefined);
+  const [carAge, setCarAge] = useState<number | undefined>(undefined);
 
   const [predictedPrice, setPredictedPrice] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -204,10 +211,26 @@ export default function Predict() {
       });
   };
 
+  const { width, height } = Dimensions.get("window");
+
   return (
     <>
       <StatusBar style="light" />
       <SafeAreaView style={styles.container}>
+        <Image
+          style={{
+            opacity: 1,
+            flex: 1,
+            width,
+            height,
+            margin: 0,
+            padding: 0,
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
+          source={require("../assets/background.png")}
+        />
         <Text style={styles.header}>Predict</Text>
         <ScrollView contentContainerStyle={styles.inputs}>
           <CustomSelectInput
@@ -313,13 +336,13 @@ export default function Predict() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#070F2B",
+    backgroundColor: "#111111",
     padding: 16,
   },
   header: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#9290C3",
+    color: "#FF3F02",
     marginTop: 32,
     marginBottom: 48,
   },
@@ -327,7 +350,7 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   predictBtn: {
-    backgroundColor: "#FF204E",
+    backgroundColor: "#FF3F02",
     padding: 16,
     borderRadius: 8,
     alignItems: "center",

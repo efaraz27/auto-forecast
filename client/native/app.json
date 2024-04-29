@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "car-price-predictor-native",
-    "slug": "car-price-predictor-native",
+    "slug": "auto-forecast-yp79jc2swcw7ieao4tbbz",
     "scheme": "carpricepredictor",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -12,9 +12,12 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.efaraz27.autoforecast"
     },
     "android": {
       "adaptiveIcon": {
@@ -32,9 +35,21 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/WorkSans.ttf", "./assets/Playfair.ttf"]
+          "fonts": [
+            "./assets/WorkSans.ttf",
+            "./assets/Playfair.ttf"
+          ]
         }
       ]
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "52c217ed-fb40-4389-bb9e-04a54e3c8bd5"
+      }
+    },
+    "owner": "efaraz27"
   }
 }

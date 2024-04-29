@@ -68,15 +68,11 @@ const LoadingContainer = styled.div`
   `};
 `;
 
-
-
-
 export function TopCars() {
   const [current, setCurrent] = useState(0);
   const [isLoading, setLoading] = useState(false);
 
   const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
-
 
   const testCar: ICar = {
     name: "Audi S3 Car",
@@ -100,13 +96,15 @@ export function TopCars() {
     gas: "Petrol",
   };
 
-  const topCars = [testCar,testCar2,testCar2,testCar,testCar2,testCar]
+  const topCars = [testCar, testCar2, testCar2, testCar, testCar2, testCar];
 
   const isEmptyTopCars = !topCars || topCars.length === 0;
 
   const cars =
     (!isEmptyTopCars &&
-      topCars.map((car) => <Car {...car} thumbnailSrc={car.thumbnailSrc} />)) ||
+      topCars.map((car, index) => (
+        <Car key={`${car}-${index}`} {...car} thumbnailSrc={car.thumbnailSrc} />
+      ))) ||
     [];
 
   const numberOfDots = isMobile ? cars.length : Math.ceil(cars.length / 3);

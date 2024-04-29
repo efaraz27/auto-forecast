@@ -137,6 +137,7 @@ const RentButton = styled(Button)`
 
 export function Car(props: ICarProps) {
   const {
+    key,
     name,
     thumbnailSrc,
     dailyPrice,
@@ -147,7 +148,7 @@ export function Car(props: ICarProps) {
   } = props;
 
   return (
-    <CarContainer>
+    <CarContainer key={key}>
       <CarThumbnail>
         <img src={thumbnailSrc} />
       </CarThumbnail>
@@ -166,7 +167,7 @@ export function Car(props: ICarProps) {
       <CarDetailsContainer>
         <CarDetail>
           <SmallIcon>
-            <FontAwesomeIcon icon={faTachometerAlt  as IconProp} />
+            <FontAwesomeIcon icon={faTachometerAlt as IconProp} />
           </SmallIcon>
           <CarInfo>{mileage}</CarInfo>
         </CarDetail>

@@ -183,7 +183,10 @@ const PredictPrice = () => {
                   className="w-full hover:border-red-500 border-2 border-solid bg-gray-800 pl-5 pr-5 pt-2 pb-2 rounded-md text-gray-400"
                 >
                   {allowedBrands.map((brand, index) => (
-                    <option key={index} value={index === 0 ? "" : brand}>
+                    <option
+                      key={`${brand}-${index}-${Math.random()}`}
+                      value={index === 0 ? "" : brand}
+                    >
                       {brand}
                     </option>
                   ))}
@@ -197,7 +200,10 @@ const PredictPrice = () => {
                   className="w-full hover:border-red-500 border-2 border-solid bg-gray-800 pl-5 pr-5 pt-2 pb-2 rounded-md text-gray-400"
                 >
                   {allowedLocations.map((location, index) => (
-                    <option key={index} value={index === 0 ? "" : location}>
+                    <option
+                      key={`${location}-${index}`}
+                      value={index === 0 ? "" : location}
+                    >
                       {location}
                     </option>
                   ))}
@@ -238,7 +244,10 @@ const PredictPrice = () => {
                     className="w-full hover:border-red-500 border-2 border-solid bg-gray-800 pl-5 pr-5 pt-2 pb-2 rounded-md text-gray-400"
                   >
                     {allowedFuelTypes.map((fuelType, index) => (
-                      <option key={index} value={index === 0 ? "" : fuelType}>
+                      <option
+                        key={`${fuelType}-${index}`}
+                        value={index === 0 ? "" : fuelType}
+                      >
                         {fuelType}
                       </option>
                     ))}
@@ -253,7 +262,7 @@ const PredictPrice = () => {
                   >
                     {allowedTransmissions.map((transmission, index) => (
                       <option
-                        key={index}
+                        key={`${transmission}-${index}`}
                         value={index === 0 ? "" : transmission}
                       >
                         {transmission}
@@ -271,7 +280,10 @@ const PredictPrice = () => {
                     className="w-full hover:border-red-500 border-2 border-solid bg-gray-800 pl-5 pr-5 pt-2 pb-2 rounded-md text-gray-400"
                   >
                     {allowedOwnerTypes.map((ownerType, index) => (
-                      <option key={index} value={index === 0 ? "" : ownerType}>
+                      <option
+                        key={`${ownerType}-${index}`}
+                        value={index === 0 ? "" : ownerType}
+                      >
                         {ownerType}
                       </option>
                     ))}
